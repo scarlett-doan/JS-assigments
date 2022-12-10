@@ -22,35 +22,37 @@ You only need to produce the same array as expected result, no need to consider 
 possibility.
  */
 
-let myArr = ['12-24-2014', '09-2022-23', '12-30-2021', '08-02-2021', '07-15-2018', '2019-12-14', '2022-14-12']
-const fixDate = (array) => {
-    const aaa = [];
-    array.forEach((item) => {
-        let dateItem = item.split("-");
-        dateItem.sort(function(a,b) {return a-b});
-        let correct = [dateItem[1], dateItem[0], dateItem[2]];
-        aaa.push(correct.join("-"));
-
-        // newArr.push([day, month, year].join("-")); 
-    });
-    return aaa;
-    /* provide your code here */
-}
-let newArr = fixDate(myArr)
-console.log(newArr);
+// let myArr = ['12-24-2014', '09-2022-23', '12-30-2021', '08-02-2021', '07-15-2018', '2019-12-14', '2022-14-12']
+// const fixDate = (array) => {
+//     const temp = [];
+//     array.forEach((item) => {
+//         let dateItem = item.split("-");
+//         dateItem.sort(function(a,b) {return a-b});
+//         let correct = [dateItem[1], dateItem[0], dateItem[2]];
+//         temp.push(correct.join("-"));
+//     });
+//     return temp;
+// }
+// let newArr = fixDate(myArr)
+// console.log(newArr);
 
 /*
 3. Counter function
 Write a counter funtion to print out in console the time difference between 2 given date
 Expected result in the console: 11 days - 13 hours - 38 minutes - 20 seconds
 */
-// const dateFrom = new Date(500000)
-// const dateTo = new Date(1000000000)
-// const counter = (from, to) => {
-//     /* provide your code here */
-// }
-// const timer = counter()
-// console.log(timer)
+const dateFrom = new Date(500000)
+const dateTo = new Date(1000000000)
+const counter = (from, to) => {
+    let dif = new Date(to - from);
+    let day = dif.getUTCDay();
+    let hour = dif.getUTCHours();
+    let min = dif.getUTCMinutes();
+    let sed = dif.getUTCSeconds();
+    return `${day} days - ${hour} hours - ${min} minutes - ${sed} seconds`;
+}
+const timer = counter(dateFrom, dateTo)
+console.log(timer)
 
 /* 
 4. Check the url and read documentation: https://restcountries.com
