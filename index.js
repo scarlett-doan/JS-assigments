@@ -3,18 +3,18 @@
 from 0 to 100
  */
 
-const printNum = () => {
-    for (let i = 0; i <= 100; i++) {
-        setTimeout(() => console.log(i), 1000)
-    }
-}
-
-printNum()
+// const printNum = () => {
+//     for (let i = 0; i <= 100; i++) {
+//         setTimeout(() => console.log(i), 1000)
+//     }
+// }
+//
+// printNum()
 
 /*
 2. Given the array below:
 myArr = ['12-24-2014', '09-2022-23', '12-30-2021', '08-02-2021', '07-15-2018', '2019-12-14', '2022-14-12']
-the array above has serveral dates, written in order month-day-year
+the array above has several dates, written in order month-day-year
 Write the code inside function fixDate(array) below to transform the array to new
 format dates day-month-year
 expected result: ['24-12-2014', '23-09-2022', '30-12-2021', '08-02-2021', '15-07-2018', '14-12-2019', '14-12-2022'] . 
@@ -22,37 +22,37 @@ You only need to produce the same array as expected result, no need to consider 
 possibility.
  */
 
-let myArr = ['12-24-2014', '09-2022-23', '12-30-2021', '08-02-2021', '07-15-2018', '2019-12-14', '2022-14-12']
-const fixDate = (array) => {
-    const temp = [];
-    array.forEach((item) => {
-        let dateItem = item.split("-");
-        dateItem.sort(function(a,b) {return a-b});
-        let correct = [dateItem[1], dateItem[0], dateItem[2]];
-        temp.push(correct.join("-"));
-    });
-    return temp;
-}
-let newArr = fixDate(myArr)
-console.log(newArr);
+// let myArr = ['12-24-2014', '09-2022-23', '12-30-2021', '08-02-2021', '07-15-2018', '2019-12-14', '2022-14-12']
+// const fixDate = (array) => {
+//     const temp = [];
+//     array.forEach((item) => {
+//         let dateItem = item.split("-");
+//         dateItem.sort(function(a,b) {return a-b});
+//         let correct = [dateItem[1], dateItem[0], dateItem[2]];
+//         temp.push(correct.join("-"));
+//     });
+//     return temp;
+// }
+// let newArr = fixDate(myArr)
+// console.log(newArr);
 
 /*
 3. Counter function
 Write a counter function to print out in console the time difference between 2 given date
 Expected result in the console: 11 days - 13 hours - 38 minutes - 20 seconds
 */
-const dateFrom = new Date(500000)
-const dateTo = new Date(1000000000)
-const counter = (from, to) => {
-    let dif = new Date(to - from);
-    let day = dif.getDay();
-    let hour = dif.getHours();
-    let min = dif.getMinutes();
-    let sec = dif.getSeconds();
-    return `${day} days - ${hour} hours - ${min} minutes - ${sec} seconds`;
-}
-const timer = counter(dateFrom, dateTo)
-console.log(timer)
+// const dateFrom = new Date(500000)
+// const dateTo = new Date(1000000000)
+// const counter = (from, to) => {
+//     let dif = new Date(to - from);
+//     let day = dif.getDay();
+//     let hour = dif.getHours();
+//     let min = dif.getMinutes();
+//     let sec = dif.getSeconds();
+//     return `${day} days - ${hour} hours - ${min} minutes - ${sec} seconds`;
+// }
+// const timer = counter(dateFrom, dateTo)
+// console.log(timer)
 
 /* 
 4. Check the url and read documentation: https://restcountries.com
@@ -83,17 +83,18 @@ const generateNewFolderName = (existingFolders) => {
         existingFolders.push("New Folder");
     }
     else{
-        let count = 0;
-        for (const item of existingFolders) {
-            if(item.includes("New Folder")){
-                count+=1;
+        let count = 1;
+        for (const existingFolder in existingFolders) {
+            if (!existingFolders.includes(`New Folder (${count})`)) {
+                existingFolders.push(`New Folder (${count})`);
+            } else {
+                count += 1;
             }
         }
-        existingFolders.push(`New Folder (${count})`)
     }
 }
 
-let folder = []
+let folder = ['New Folder', 'New Folder (2)']
 generateNewFolderName(folder)
 generateNewFolderName(folder)
 generateNewFolderName(folder)
@@ -115,77 +116,77 @@ Complete class TaxableBook:
 - give the logic to calculate price with taxRate. For example: 
 cost 14, profit 0.3 , tax 24% => expected price is 30.43
 */
-class Book {
-    _title
-    _cost
-    _profit
-    constructor(title, cost, profit) {
-        if(typeof title != "string"){
-            throw "Title must be string";
-        }else if (title === ""){
-            throw "Title cannot be empty";
-        }else{
-            this._title = title;
-        }
-
-        if (typeof cost != "number"){
-            throw "Cost must be number";
-        }else if (cost <= 0){
-            throw "Cost must be positive";
-        }else {
-            this._cost = cost;
-        }
-
-        if (typeof profit != "number"){
-            throw "Profit must be number";
-        }else if (profit < 0 || profit > 0.5){
-            throw "Profit must be >0 and <=0.5";
-        }else {
-            this._profit = profit;
-        }
-
-        this._price = this._cost/(1-this._profit);
-
-    };
-
-    getPrice(){
-        return `The selling price is ${this._price}`;
-    }
-
-    getProfit(){
-        this._profitAmount = this._price*this._profit;
-        return `Profit is ${this._profitAmount}`;
-    }
-
-    adjustPrice(amount){
-        if (typeof amount == "number") {
-            this._price += amount;
-        } else {
-            throw "Amount should be a number";
-        }
-    }
-}
-
-class TaxableBook extends Book{
-    _taxRate
-    constructor(title, cost, profit, taxRate) {
-        super(title, cost, profit);
-        if (typeof taxRate != "number"){
-            throw "taxRate must be number";
-        }else if (taxRate < 0){
-            throw "taxRate must be >=0";
-        }else {
-            this._taxRate = taxRate;
-        }
-        this._price = (this._cost / (1 - this._profit - (this._taxRate/100))).toFixed(2);
-    }
-}
-
-const book1 = new Book("The Power of Habits", 14, 0.3)
-console.log(book1.getPrice());
-console.log(book1.getProfit());
-book1.adjustPrice(-3);
-console.log("After adjust then", book1.getPrice());
-
-const book2 = new TaxableBook("The Power of Habits", 14, 0.3, 24)
-console.log("With tax rate,", book2.getPrice());
+// class Book {
+//     _title
+//     _cost
+//     _profit
+//     constructor(title, cost, profit) {
+//         if(typeof title != "string"){
+//             throw "Title must be string";
+//         }else if (title === ""){
+//             throw "Title cannot be empty";
+//         }else{
+//             this._title = title;
+//         }
+//
+//         if (typeof cost != "number"){
+//             throw "Cost must be number";
+//         }else if (cost <= 0){
+//             throw "Cost must be positive";
+//         }else {
+//             this._cost = cost;
+//         }
+//
+//         if (typeof profit != "number"){
+//             throw "Profit must be number";
+//         }else if (profit < 0 || profit > 0.5){
+//             throw "Profit must be >0 and <=0.5";
+//         }else {
+//             this._profit = profit;
+//         }
+//
+//         this._price = this._cost/(1-this._profit);
+//
+//     };
+//
+//     getPrice(){
+//         return `The selling price is ${this._price}`;
+//     }
+//
+//     getProfit(){
+//         this._profitAmount = this._price*this._profit;
+//         return `Profit is ${this._profitAmount}`;
+//     }
+//
+//     adjustPrice(amount){
+//         if (typeof amount == "number") {
+//             this._price += amount;
+//         } else {
+//             throw "Amount should be a number";
+//         }
+//     }
+// }
+//
+// class TaxableBook extends Book{
+//     _taxRate
+//     constructor(title, cost, profit, taxRate) {
+//         super(title, cost, profit);
+//         if (typeof taxRate != "number"){
+//             throw "taxRate must be number";
+//         }else if (taxRate < 0){
+//             throw "taxRate must be >=0";
+//         }else {
+//             this._taxRate = taxRate;
+//         }
+//         this._price = (this._cost / (1 - this._profit - (this._taxRate/100))).toFixed(2);
+//     }
+// }
+//
+// const book1 = new Book("The Power of Habits", 14, 0.3)
+// console.log(book1.getPrice());
+// console.log(book1.getProfit());
+// book1.adjustPrice(-3);
+// console.log("After adjust then", book1.getPrice());
+//
+// const book2 = new TaxableBook("The Power of Habits", 14, 0.3, 24)
+// console.log("With tax rate,", book2.getPrice());
