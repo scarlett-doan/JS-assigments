@@ -45,10 +45,10 @@ const dateFrom = new Date(500000)
 const dateTo = new Date(1000000000)
 const counter = (from, to) => {
     let dif = new Date(to - from);
-    let day = dif.getUTCDay();
-    let hour = dif.getUTCHours();
-    let min = dif.getUTCMinutes();
-    let sec = dif.getUTCSeconds();
+    let day = dif.getDay();
+    let hour = dif.getHours();
+    let min = dif.getMinutes();
+    let sec = dif.getSeconds();
     return `${day} days - ${hour} hours - ${min} minutes - ${sec} seconds`;
 }
 const timer = counter(dateFrom, dateTo)
@@ -119,8 +119,6 @@ class Book {
     _title
     _cost
     _profit
-    _price
-    _profitAmount
     constructor(title, cost, profit) {
         if(typeof title != "string"){
             throw "Title must be string";
@@ -153,6 +151,7 @@ class Book {
     getPrice(){
         return `The selling price is ${this._price}`;
     }
+
     getProfit(){
         this._profitAmount = this._price*this._profit;
         return `Profit is ${this._profitAmount}`;
@@ -172,9 +171,9 @@ class TaxableBook extends Book{
     constructor(title, cost, profit, taxRate) {
         super(title, cost, profit);
         if (typeof taxRate != "number"){
-            throw "Profit must be number";
+            throw "taxRate must be number";
         }else if (taxRate < 0){
-            throw "Profit must be >0 and <=0.5";
+            throw "taxRate must be >=0";
         }else {
             this._taxRate = taxRate;
         }
