@@ -41,18 +41,23 @@ possibility.
 Write a counter function to print out in console the time difference between 2 given date
 Expected result in the console: 11 days - 13 hours - 38 minutes - 20 seconds
 */
-// const dateFrom = new Date(500000)
-// const dateTo = new Date(1000000000)
-// const counter = (from, to) => {
-//     let dif = new Date(to - from);
-//     let day = dif.getDay();
-//     let hour = dif.getHours();
-//     let min = dif.getMinutes();
-//     let sec = dif.getSeconds();
-//     return `${day} days - ${hour} hours - ${min} minutes - ${sec} seconds`;
-// }
-// const timer = counter(dateFrom, dateTo)
-// console.log(timer)
+const dateFrom = new Date(500000)
+const dateTo = new Date(1000000000)
+const counter = (from, to) => {
+    let dif = new Date (to - from)
+
+    const days = Math.floor(dif/(1000*60*60*24));
+    dif -= days * (1000*60*60*24);
+    const hours = Math.floor(dif/(1000*60*60));
+    dif -= hours * (1000*60*60);
+    const min = Math.floor(dif/(1000*60));
+    dif -= min * (1000*60);
+    const sec = Math.floor(dif/1000);
+
+    return `${days} days - ${hours} hours - ${min} minutes - ${sec} seconds`;
+}
+const timer = counter(dateFrom, dateTo)
+console.log(timer)
 
 /* 
 4. Check the url and read documentation: https://restcountries.com
@@ -64,11 +69,11 @@ The data fetched from url should be displayed in index.html.
 // const getAllCountries = () => {
 //     /* provide your code here */
 // }
-
+//
 // const getSingleCountry = () => {
 //     /* provide your code here */
 // }
-
+//
 // getAllCountries()
 
 /*
@@ -78,28 +83,28 @@ If folder 'New Folder' exists, it should add 'New Folder (1)' to array. If 'New 
 to array, and so on.
 */
 
-const generateNewFolderName = (existingFolders) => {
-    if(!existingFolders.includes("New Folder")){
-        existingFolders.push("New Folder");
-    }
-    else{
-        let count = 1;
-        for (const existingFolder in existingFolders) {
-            if (!existingFolders.includes(`New Folder (${count})`)) {
-                existingFolders.push(`New Folder (${count})`);
-            } else {
-                count += 1;
-            }
-        }
-    }
-}
-
-let folder = ['New Folder', 'New Folder (2)']
-generateNewFolderName(folder)
-generateNewFolderName(folder)
-generateNewFolderName(folder)
-generateNewFolderName(folder)
-console.log(folder); //expect to see ['New Folder', 'New Folder (1)', 'New Folder (2)', 'New Folder (3)']
+// const generateNewFolderName = (existingFolders) => {
+//     if(!existingFolders.includes("New Folder")){
+//         existingFolders.push("New Folder");
+//     }
+//     else{
+//         let count = 1;
+//         for (const existingFolder in existingFolders) {
+//             if (!existingFolders.includes(`New Folder (${count})`)) {
+//                 existingFolders.push(`New Folder (${count})`);
+//             } else {
+//                 count += 1;
+//             }
+//         }
+//     }
+// }
+//
+//  let folder = ["New Folder (1)", "Attachments"]
+// generateNewFolderName(folder)
+// generateNewFolderName(folder)
+// generateNewFolderName(folder)
+// generateNewFolderName(folder)
+// console.log(folder); //expect to see ['New Folder', 'New Folder (1)', 'New Folder (2)', 'New Folder (3)']
 
 /* 
 6. Complete class Book:
