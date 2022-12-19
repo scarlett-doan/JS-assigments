@@ -13,6 +13,22 @@
         * use grid to display all the countries fetched from the given url
         * no extra library, only vanilla CSS or SASS. Be creative in your own layout
      -->
+    <label> Input country name
+        <input class="countryInput" name="country" placeholder="Enter at least 4 characters"/>
+    </label>
+    <button class="getCountry">Search</button>
+    <button class="getAll">Show all countries</button>
+    <table id="result">
+        <thead>
+            <tr>
+                <td>No.</td>
+                <td>Country Name</td>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+
     <script src="index.js"></script>
 </body>
 </html>

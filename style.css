@@ -1,0 +1,107 @@
+label {
+    color: darkred;
+    font-family: Georgia,sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: block;
+}
+
+.input {
+    position: relative;
+}
+
+.countryInput {
+    display: block;
+    margin-top: 15px;
+    padding: 10px;
+    width: 180px;
+    font-family: Georgia, sans-serif;
+    font-size: 15px;
+    line-height: 1em;
+    border-radius: 0.4rem;
+    /*transition: box-shadow;*/
+    outline-color: dodgerblue;
+}
+
+table {
+    border-collapse: collapse;
+    font-family: Georgia, sans-serif;
+    table-layout: fixed;
+    margin-top: 15px;
+}
+table td {
+    padding: 15px;
+}
+table td:nth-child(2){
+    width: 360px;
+}
+table thead td {
+    background-color: #54585d;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid #dddfe1;
+}
+table tbody td {
+    color: #636363;
+    border: 1px solid #dddfe1;
+}
+table tbody tr {
+    background-color: #f9fafb;
+}
+table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+button {
+    align-items: center;
+    appearance: none;
+    background-size: calc(100% + 20px) calc(100% + 20px);
+    border-radius: 100px;
+    border-width: 0;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: Georgia,sans-serif;
+    font-size: 1rem;
+    height: auto;
+    justify-content: center;
+    line-height: 1.5;
+    padding: 6px 20px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color .2s,background-position .2s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    white-space: nowrap;
+    margin-top: 15px;
+}
+
+button:active,
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    background-position: -20px -20px;
+}
+.getCountry {
+    background-color: #3EB2FD;
+    background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+}
+.getCountry:focus:not(:active) {
+    box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
+}
+
+.getAll{
+    background-color: hotpink;
+    background-image: linear-gradient(1deg, purple, mediumorchid 99%);
+}
+.getAll:focus:not(:active) {
+    box-shadow: mediumpurple 0 0 0 .125em;
+}

@@ -41,23 +41,25 @@ possibility.
 Write a counter function to print out in console the time difference between 2 given date
 Expected result in the console: 11 days - 13 hours - 38 minutes - 20 seconds
 */
-const dateFrom = new Date(500000)
-const dateTo = new Date(1000000000)
-const counter = (from, to) => {
-    let dif = new Date (to - from)
-
-    const days = Math.floor(dif/(1000*60*60*24));
-    dif -= days * (1000*60*60*24);
-    const hours = Math.floor(dif/(1000*60*60));
-    dif -= hours * (1000*60*60);
-    const min = Math.floor(dif/(1000*60));
-    dif -= min * (1000*60);
-    const sec = Math.floor(dif/1000);
-
-    return `${days} days - ${hours} hours - ${min} minutes - ${sec} seconds`;
-}
-const timer = counter(dateFrom, dateTo)
-console.log(timer)
+// const dateFrom = new Date(500000)
+// const dateTo = new Date(1000000000)
+// const counter = (from, to) => {
+//     let dif = new Date (to - from)
+//     const day = dif.getDay()
+//     console.log(day);
+//
+//     const days = Math.floor(dif/(1000*60*60*24));
+//     dif -= days * (1000*60*60*24);
+//     const hours = Math.floor(dif/(1000*60*60));
+//     dif -= hours * (1000*60*60);
+//     const min = Math.floor(dif/(1000*60));
+//     dif -= min * (1000*60);
+//     const sec = Math.floor(dif/1000);
+//
+//     return `${days} days - ${hours} hours - ${min} minutes - ${sec} seconds`;
+// }
+// const timer = counter(dateFrom, dateTo)
+// console.log(timer)
 
 /* 
 4. Check the url and read documentation: https://restcountries.com
@@ -66,15 +68,59 @@ console.log(timer)
 The data fetched from url should be displayed in index.html.
 */
 
-// const getAllCountries = () => {
-//     /* provide your code here */
-// }
-//
-// const getSingleCountry = () => {
-//     /* provide your code here */
-// }
-//
-// getAllCountries()
+const getAllCountries = async () => {
+    return await fetch('https://restcountries.com/v3.1/all')
+        .then((response) => response.json())
+        .then((data) => {
+            const names = []
+            for (const country of data) {
+                names.push(country.name.common);
+            }
+            names.sort();
+            return names;
+        });
+}
+const getSingleCountry = async (countryName) => {
+    return await fetch(`https://restcountries.com/v3.1/name/${countryName}`)
+        .then((response) => response.json())
+        .then((data) => {
+            const names = []
+            for (const country of data) {
+                names.push(country.name.common);
+            }
+            names.sort();
+            return names;
+        });
+}
+
+
+const getAllBtn = document.querySelector(".getAll");
+const getSingle = document.querySelector(".getCountry");
+const input = document.querySelector(".countryInput");
+const searchResult = document.querySelector("#tbody");
+
+getAllBtn.addEventListener("click", async (e) => {
+    searchResult.innerHTML = "";
+    const result = await getAllCountries();
+    result.forEach((item,index)=>{
+        let newRow = searchResult.insertRow();
+        newRow.insertCell().appendChild(document.createTextNode(index+1));
+        newRow.insertCell().appendChild(document.createTextNode(item));
+    })
+});
+
+getSingle.addEventListener("click", async (e) => {
+    searchResult.innerHTML = "";
+    const countryName = input.value;
+    const result = await getSingleCountry(countryName);
+    result.forEach((item,index)=>{
+        let newRow = searchResult.insertRow();
+        newRow.insertCell().appendChild(document.createTextNode(index+1));
+        newRow.insertCell().appendChild(document.createTextNode(item));
+    })
+});
+
+
 
 /*
 5. Provide logic for function generateNewFolderName, which receive an array as argument. Everytime the function gets called,
